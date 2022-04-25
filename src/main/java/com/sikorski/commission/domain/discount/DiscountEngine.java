@@ -25,7 +25,7 @@ public class DiscountEngine {
 
     private Commission calculate(Client client, DiscountRule rule) {
         var commission = rule.calculate(client);
-        log.info("{} for clientId: {}", commission.toString(), client.getClientId());
+        log.info("{} for clientId: {}", commission.getInfoLog(), client.getClientId());
         return commission;
     }
 }

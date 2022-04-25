@@ -17,7 +17,10 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @Import(MockWebServer.class)
 class ExchangeRateRepositoryTest extends ContainerizedIntegrationTest {
-    public static final String SAMPLE_RATE = "4.636079";
+    private static final String SAMPLE_RATE = "4.636079";
+    private static final String PLN = "PLN";
+    private static final LocalDate DATE = LocalDate.of(2020, 4, 20);
+
     @Autowired
     private MockWebServer webServer;
 
@@ -31,12 +34,12 @@ class ExchangeRateRepositoryTest extends ContainerizedIntegrationTest {
     @Test
     void getRateShouldReturnCorrectRate() {
         // given
-        var mockResponse = getMockJsonResponse(true, "PLN");
+        var mockResponse = getMockJsonResponse(true, PLN);
 
-        webServer.createMockServer(HttpStatus.OK, mockResponse, "/2022-04-25", "symbols", "PLN");
+        webServer.createMockServer(HttpStatus.OK, mockResponse, "/" + DATE, "symbols", PLN);
 
         // when
-        var response = repository.getRate("PLN", LocalDate.now());
+        var response = repository.getRate(PLN, DATE);
 
         // then
         Assertions.assertThat(response).isEqualTo(SAMPLE_RATE);
@@ -48,10 +51,10 @@ class ExchangeRateRepositoryTest extends ContainerizedIntegrationTest {
         // given
         var mockResponse = getMockJsonResponse(true, "KZT");
 
-        webServer.createMockServer(HttpStatus.OK, mockResponse, "/2022-04-25", "symbols", "PLN");
+        webServer.createMockServer(HttpStatus.OK, mockResponse, "/" + DATE, "symbols", PLN);
 
         // when
-        ThrowableAssert.ThrowingCallable throwingCallable = () -> repository.getRate("PLN", LocalDate.now());
+        ThrowableAssert.ThrowingCallable throwingCallable = () -> repository.getRate(PLN, DATE);
 
         // then
         assertThatThrownBy(throwingCallable).isExactlyInstanceOf(ExchangeRateNotFound.class);
@@ -62,12 +65,12 @@ class ExchangeRateRepositoryTest extends ContainerizedIntegrationTest {
     void getRateWithNoSuccessShouldThrowException() {
         // given
 
-        var mockResponse = getMockJsonResponse(false, "PLN");
+        var mockResponse = getMockJsonResponse(false, PLN);
 
-        webServer.createMockServer(HttpStatus.OK, mockResponse, "/2022-04-25", "symbols", "PLN");
+        webServer.createMockServer(HttpStatus.OK, mockResponse, "/" + DATE, "symbols", PLN);
 
         // when
-        ThrowableAssert.ThrowingCallable throwingCallable = () -> repository.getRate("PLN", LocalDate.now());
+        ThrowableAssert.ThrowingCallable throwingCallable = () -> repository.getRate(PLN, DATE);
 
         // then
         assertThatThrownBy(throwingCallable).isExactlyInstanceOf(ExchangeRateNotFound.class);
@@ -78,10 +81,10 @@ class ExchangeRateRepositoryTest extends ContainerizedIntegrationTest {
                 {
                     "success": %s,
                     "historical": true,
-                    "base": "PN",
+                    "base": "EUR",
                     "date": "2022-04-21",
                     "rates": {
-                        "%s": "%s"
+                        "%s": %s
                     }
                 }""", success, currency, SAMPLE_RATE);
     }

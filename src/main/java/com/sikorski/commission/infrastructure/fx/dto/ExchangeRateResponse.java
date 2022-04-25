@@ -1,11 +1,12 @@
 package com.sikorski.commission.infrastructure.fx.dto;
 
-import lombok.Data;
+import lombok.Value;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 
-@Data
-public final class ExchangeRateResponse {
-    private boolean success;
-    private HashMap<String, String> rates;
+@Value
+public class ExchangeRateResponse {
+    boolean success;
+    HashMap<String, BigDecimal> rates;
 }

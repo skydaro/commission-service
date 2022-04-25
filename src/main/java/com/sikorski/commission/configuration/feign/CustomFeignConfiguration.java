@@ -1,4 +1,4 @@
-package com.sikorski.commission.configuration;
+package com.sikorski.commission.configuration.feign;
 
 import com.sikorski.commission.infrastructure.fx.ExchangeRateClient;
 import feign.Feign;

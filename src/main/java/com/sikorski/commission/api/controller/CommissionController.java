@@ -1,8 +1,7 @@
 package com.sikorski.commission.api.controller;
 
-import com.sikorski.commission.api.dto.TransactionRequest;
 import com.sikorski.commission.application.CommissionService;
-import com.sikorski.commission.domain.fx.ExchangeRateNotFound;
+import com.sikorski.commission.api.controller.dto.TransactionRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.Synchronized;
 import lombok.extern.slf4j.Slf4j;
@@ -31,16 +30,10 @@ public class CommissionController {
     @Synchronized()
     public ResponseEntity<?> getCommission(@Valid @RequestBody TransactionRequest request,
                                            BindingResult bindingResult) {
-        try {
-            if (request.getDate().isAfter(LocalDate.now())) {
-                log.error("Date cannot be future date {}", request.getDate());
-                return new ResponseEntity<>("Date cannot be future date", HttpStatus.BAD_REQUEST);
-            }
-            var response = service.getCommission(request);
-            return new ResponseEntity<>(response, HttpStatus.OK);
-        } catch (ExchangeRateNotFound e) {
-            log.error(e.getMessage(), e);
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        if (request.getDate().isAfter(LocalDate.now())) {
+            log.error("Date cannot be future date {}", request.getDate());
+            return new ResponseEntity<>("Date cannot be future date", HttpStatus.BAD_REQUEST);
         }
+        return new ResponseEntity<>(service.getCommission(request), HttpStatus.OK);
     }
 }

@@ -12,16 +12,16 @@ class MoneyTest {
 
     @ParameterizedTest(name = "{0}/{1}={2}")
     @MethodSource("convertingWithRatesValues")
-    void divide(String amount, String rate, BigDecimal output) {
+    void divide(String amount, BigDecimal rate, BigDecimal output) {
         var money = new Money(amount);
         Assertions.assertThat(money.divide(rate).getAmount()).isEqualByComparingTo(output);
     }
 
     private static Stream<Arguments> convertingWithRatesValues() {
         return Stream.of(
-                Arguments.of("100.00", "4.636079", BigDecimal.valueOf(21.57)),
-                Arguments.of("99.97", "4.636079", BigDecimal.valueOf(21.56)),
-                Arguments.of("10.01", "482.657706", BigDecimal.valueOf(0.02))
+                Arguments.of("100.00", BigDecimal.valueOf(4.636079), BigDecimal.valueOf(21.57)),
+                Arguments.of("99.97", BigDecimal.valueOf(4.636079), BigDecimal.valueOf(21.56)),
+                Arguments.of("10.01", BigDecimal.valueOf(482.657706), BigDecimal.valueOf(0.02))
                 );
     }
 

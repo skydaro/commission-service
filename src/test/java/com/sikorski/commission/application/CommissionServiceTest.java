@@ -1,8 +1,8 @@
 package com.sikorski.commission.application;
 
 import com.sikorski.commission.ContainerizedIntegrationTest;
-import com.sikorski.commission.api.dto.CommissionResponse;
-import com.sikorski.commission.api.dto.TransactionRequest;
+import com.sikorski.commission.api.controller.dto.CommissionResponse;
+import com.sikorski.commission.api.controller.dto.TransactionRequest;
 import com.sikorski.commission.domain.dao.ClientRepository;
 import lombok.SneakyThrows;
 import org.assertj.core.api.Assertions;

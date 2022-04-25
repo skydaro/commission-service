@@ -1,7 +1,8 @@
 package com.sikorski.commission.domain.fx;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public interface ExchangeRateRepository {
-    String getRate(String currency, LocalDate date) throws ExchangeRateNotFound;
+    BigDecimal getRate(String currency, LocalDate date);
 }

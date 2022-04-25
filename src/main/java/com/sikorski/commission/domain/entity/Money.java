@@ -21,8 +21,8 @@ public class Money {
     private BigDecimal amount;
     private Currency currency;
 
-    public Money divide(String rate) {
-        return new Money(amount.divide(convert(rate), currency.getDefaultFractionDigits(), DEFAULT_ROUNDING));
+    public Money divide(BigDecimal rate) {
+        return new Money(amount.divide(rate, currency.getDefaultFractionDigits(), DEFAULT_ROUNDING));
     }
 
     public Money multiply(BigDecimal amount) {
@@ -46,10 +46,6 @@ public class Money {
 
     public boolean isDefaultCurrency(String currency) {
         return this.currency.getCurrencyCode().equals(currency);
-    }
-
-    private static BigDecimal convert(String amount) {
-        return BigDecimal.valueOf(Double.parseDouble(amount));
     }
 
     @Override

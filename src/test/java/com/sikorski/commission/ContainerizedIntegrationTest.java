@@ -2,9 +2,7 @@ package com.sikorski.commission;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Tag;
-import org.springframework.boot.test.autoconfigure.actuate.metrics.AutoConfigureMetrics;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -14,10 +12,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.testcontainers.utility.DockerImageName;
 
-import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER_CLASS;
-
 @Slf4j
-@AutoConfigureMetrics
 @Tag("ContainerizedIntegrationTest")
 @ActiveProfiles("test")
 @SpringBootTest(
@@ -32,7 +27,6 @@ import static org.springframework.test.annotation.DirtiesContext.ClassMode.AFTER
         }
 )
 @Testcontainers
-@DirtiesContext(classMode = AFTER_CLASS)
 public abstract class ContainerizedIntegrationTest {
 
     public static final DockerImageName MOCKSERVER_IMAGE = DockerImageName.parse("jamesdbloom/mockserver:mockserver-5.11.2");

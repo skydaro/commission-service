@@ -23,18 +23,20 @@ public class Commission extends BaseEntity {
         this.transaction = transaction;
     }
 
-    public BigDecimal getAmount() {
-        return money.getAmount();
-    }
-
-
     @OneToOne(fetch = FetchType.EAGER, optional = false)
     @ToString.Exclude
     @JoinColumn(name = "transaction_id")
     private Transaction transaction;
 
-    @Override
-    public String toString() {
+    public BigDecimal getAmount() {
+        return money.getAmount();
+    }
+
+    public String getCurrencyCode() {
+        return money.getCurrency().getCurrencyCode();
+    }
+
+    public String getInfoLog() {
         return "Commission calculated by " + rule + ": " + getAmount();
     }
 }
