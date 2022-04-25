@@ -1,0 +1,14 @@
+- name: ClientWithDiscountRule
+  type: PLAIN
+  settings:
+    amount: 0.05
+- name: DefaultDiscountRule
+  type: WITH_MIN
+  settings:
+    minAmount: 0.05
+    price: 0.005
+- name: HighTurnoverDiscountRule
+  type: WITH_LIMIT
+  settings:
+    limit: 1000.00
+    amount: 0.03
