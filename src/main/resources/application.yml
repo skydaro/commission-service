@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: transaction-commission-service
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+  datasource:
+    url: "${DATABASE_URL:jdbc:postgresql://localhost:5432/postgres}"
+    username: "${DATABASE_USERNAME:postgres}"
+    password: "${DATABASE_PASSWORD:example}"
+
+server:
+  error:
+    include-message: always
+
+feign:
+  client:
+    fx-client:
+      url: "https://api.exchangerate.host"
+      connectTimeout: 5000
+      readTimeout: 5000
