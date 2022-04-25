@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  commission-service:
+    container_name: commission-service
+    image: commission-service:latest
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres-database
+    environment:
+      DATABASE_URL: jdbc:postgresql://postgres-database:5432/postgres
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: example
+  postgres-database:
+    container_name: postgres-database
+    ports:
+      - '5432:5432'
+    image: postgres:13.3-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: example
+volumes:
+  postgres_data: {}
+
