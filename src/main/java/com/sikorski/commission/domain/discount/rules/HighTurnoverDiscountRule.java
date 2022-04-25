@@ -9,11 +9,9 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
-import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
 
-@Slf4j
 @Jacksonized
 @SuperBuilder
 @Data

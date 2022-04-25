@@ -45,7 +45,7 @@ public abstract class ContainerizedIntegrationTest {
 
     @DynamicPropertySource
     protected static void registerDynamicProperties(DynamicPropertyRegistry registry) {
-        registry.add("fx.api.baseUrl", mockServerContainer::getEndpoint);
+        registry.add("feign.client.fx-client.url", mockServerContainer::getEndpoint);
         registry.add("spring.datasource.url",
                 () -> String.format("jdbc:postgresql://localhost:%d/%s", postgreSqlContainer.getFirstMappedPort(), postgreSqlContainer.getDatabaseName()));
         registry.add("spring.datasource.username", postgreSqlContainer::getUsername);

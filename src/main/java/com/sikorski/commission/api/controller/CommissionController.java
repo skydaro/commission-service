@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 
 @Slf4j
 @RestController
@@ -25,11 +26,16 @@ import javax.validation.Valid;
 public class CommissionController {
 
     private final CommissionService service;
+
     @PostMapping()
     @Synchronized()
     public ResponseEntity<?> getCommission(@Valid @RequestBody TransactionRequest request,
-                                                            BindingResult bindingResult) {
+                                           BindingResult bindingResult) {
         try {
+            if (request.getDate().isAfter(LocalDate.now())) {
+                log.error("Date cannot be future date {}", request.getDate());
+                return new ResponseEntity<>("Date cannot be future date", HttpStatus.BAD_REQUEST);
+            }
             var response = service.getCommission(request);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (ExchangeRateNotFound e) {

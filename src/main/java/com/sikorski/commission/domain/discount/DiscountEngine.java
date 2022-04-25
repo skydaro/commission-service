@@ -18,12 +18,12 @@ public class DiscountEngine {
     public Commission process(Client client) {
         return discountRules.stream()
                 .filter(rule -> rule.matches(client))
-                .map(rule -> getCalculate(client, rule))
+                .map(rule -> calculate(client, rule))
                 .min(Comparator.comparing(Commission::getAmount))
                 .orElseThrow();
     }
 
-    private Commission getCalculate(Client client, DiscountRule rule) {
+    private Commission calculate(Client client, DiscountRule rule) {
         var commission = rule.calculate(client);
         log.info("{} for clientId: {}", commission.toString(), client.getClientId());
         return commission;
