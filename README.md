@@ -1,4 +1,4 @@
-# transaction-commission-service
+# commission-service
 
 ## Description
 REST API with an endpoint for transaction commission calculation.
