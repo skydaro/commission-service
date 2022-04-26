@@ -30,6 +30,7 @@ public class CommissionController {
     @Synchronized()
     public ResponseEntity<?> getCommission(@Valid @RequestBody TransactionRequest request,
                                            BindingResult bindingResult) {
+        log.info("Transaction request received: {}", request);
         if (request.getDate().isAfter(LocalDate.now())) {
             log.error("Date cannot be future date {}", request.getDate());
             return new ResponseEntity<>("Date cannot be future date", HttpStatus.BAD_REQUEST);
