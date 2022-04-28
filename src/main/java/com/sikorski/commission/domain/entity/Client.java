@@ -17,6 +17,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @ToString(callSuper = true)
 public class Client extends BaseEntity {
+    @Column(unique = true)
     private Integer clientId;
 
     @Column(name = "has_discount")
