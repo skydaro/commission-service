@@ -1,7 +1,7 @@
 package com.sikorski.commission.api.controller;
 
-import com.sikorski.commission.application.CommissionService;
 import com.sikorski.commission.api.controller.dto.TransactionRequest;
+import com.sikorski.commission.application.service.CommissionService;
 import lombok.RequiredArgsConstructor;
 import lombok.Synchronized;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 
 @Slf4j
 @RestController
@@ -31,10 +30,6 @@ public class CommissionController {
     public ResponseEntity<?> getCommission(@Valid @RequestBody TransactionRequest request,
                                            BindingResult bindingResult) {
         log.info("Transaction request received: {}", request);
-        if (request.getDate().isAfter(LocalDate.now())) {
-            log.error("Date cannot be future date {}", request.getDate());
-            return new ResponseEntity<>("Date cannot be future date", HttpStatus.BAD_REQUEST);
-        }
         return new ResponseEntity<>(service.getCommission(request), HttpStatus.OK);
     }
 }

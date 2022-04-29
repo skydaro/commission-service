@@ -22,13 +22,4 @@ public class CustomErrorHandler {
             webRequest.getResponse().sendError(HttpStatus.BAD_REQUEST.value(), exception.getMessage());
         }
     }
-
-    @ExceptionHandler(ExchangeRateNotFound.class)
-    public void handleServiceException(ExchangeRateNotFound exception,
-                                       ServletWebRequest webRequest) throws IOException {
-        log.error(exception.getMessage(), exception);
-        if (webRequest.getResponse() != null) {
-            webRequest.getResponse().sendError(HttpStatus.NOT_FOUND.value(), exception.getMessage());
-        }
-    }
 }
