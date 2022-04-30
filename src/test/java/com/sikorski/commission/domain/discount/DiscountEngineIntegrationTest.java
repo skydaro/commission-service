@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -54,10 +56,7 @@ class DiscountEngineIntegrationTest extends ContainerizedIntegrationTest {
         // given
         Set<Transaction> transactions = new HashSet<>();
         transactions.add(createSampleTransaction("1500", null, false));
-        var client = Client.builder()
-                .clientId(SAMPLE_CLIENT_ID)
-                .transactions(transactions)
-                .build();
+        var client = createSampleClient(true, transactions);
 
         // when
         var result = client.commitTransaction(createSampleTransaction("7000", client, true), discountEngine);
@@ -67,23 +66,18 @@ class DiscountEngineIntegrationTest extends ContainerizedIntegrationTest {
     }
 
 
-
     @NotNull
     private Transaction createSampleTransaction(String amount, Client client, boolean isCurrent) {
-        return Transaction.builder()
-                .client(client)
-                .money(new Money(amount))
-                .date(SAMPLE_DATE)
-                .isCurrent(isCurrent)
-                .build();
+        return new Transaction(new Money(amount), SAMPLE_DATE, client, ZonedDateTime.now(ZoneOffset.UTC), isCurrent);
     }
 
     @NotNull
     private Client createSampleClient(boolean hasDiscount) {
-        return Client.builder()
-                .clientId(SAMPLE_CLIENT_ID)
-                .hasDiscount(hasDiscount)
-                .transactions(new HashSet<>())
-                .build();
+        return new Client(SAMPLE_CLIENT_ID, hasDiscount, new HashSet<>(), 0L);
+    }
+
+    @NotNull
+    private Client createSampleClient(boolean hasDiscount, Set<Transaction> transactions) {
+        return new Client(SAMPLE_CLIENT_ID, hasDiscount, transactions, 0L);
     }
 }

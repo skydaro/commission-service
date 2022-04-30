@@ -15,7 +15,6 @@ import java.time.ZonedDateTime;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @ToString(callSuper = true)
-@Builder
 public class Transaction extends BaseEntity {
 
     @Embedded
