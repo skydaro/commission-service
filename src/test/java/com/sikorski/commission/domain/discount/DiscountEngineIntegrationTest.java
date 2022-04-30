@@ -29,7 +29,7 @@ class DiscountEngineIntegrationTest extends ContainerizedIntegrationTest {
         // given
         var client = createSampleClient(false);
         var transaction = createSampleTransaction("150.00", client, true);
-        client.commitTransaction(transaction, discountEngine);
+        client.calculateCommission(transaction, discountEngine);
 
         // when
         var result = discountEngine.process(client);
@@ -45,7 +45,7 @@ class DiscountEngineIntegrationTest extends ContainerizedIntegrationTest {
         var transaction = createSampleTransaction("500", client, true);
 
         // when
-        var result = client.commitTransaction(transaction, discountEngine);
+        var result = client.calculateCommission(transaction, discountEngine);
 
         // then
         Assertions.assertThat(result.getAmount()).isEqualByComparingTo(valueOf(0.05));
@@ -59,7 +59,7 @@ class DiscountEngineIntegrationTest extends ContainerizedIntegrationTest {
         var client = createSampleClient(true, transactions);
 
         // when
-        var result = client.commitTransaction(createSampleTransaction("7000", client, true), discountEngine);
+        var result = client.calculateCommission(createSampleTransaction("7000", client, true), discountEngine);
 
         // then
         Assertions.assertThat(result.getAmount()).isEqualByComparingTo(valueOf(0.03));

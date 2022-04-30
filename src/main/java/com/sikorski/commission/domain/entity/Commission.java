@@ -1,8 +1,16 @@
 package com.sikorski.commission.domain.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Getter
@@ -23,9 +31,8 @@ public class Commission extends BaseEntity {
         this.transaction = transaction;
     }
 
-    @OneToOne(fetch = FetchType.EAGER, optional = false)
+    @OneToOne(fetch = FetchType.EAGER)
     @ToString.Exclude
-    @JoinColumn(name = "transaction_id")
     private Transaction transaction;
 
     public BigDecimal getAmount() {

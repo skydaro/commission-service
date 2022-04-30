@@ -4,7 +4,6 @@ import an.awesome.pipelinr.Command;
 import com.sikorski.commission.api.controller.dto.TransactionRequest;
 import com.sikorski.commission.application.command.CalculateCommissionCommand;
 import com.sikorski.commission.domain.dao.ClientRepository;
-import com.sikorski.commission.domain.dao.CommissionRepository;
 import com.sikorski.commission.domain.discount.DiscountEngine;
 import com.sikorski.commission.domain.entity.Client;
 import com.sikorski.commission.domain.entity.Commission;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CalculateCommissionCommandHandler implements Command.Handler<CalculateCommissionCommand, Commission> {
     private final ClientRepository clientRepository;
-    private final CommissionRepository commissionRepository;
     private final ExchangeRateRepository exchangeRateRepository;
     private final DiscountEngine discountEngine;
 
@@ -27,10 +25,9 @@ public class CalculateCommissionCommandHandler implements Command.Handler<Calcul
         var money = getMoney(command.request());
         var client = getClient(command.request().getClientId());
         var transaction = Transaction.create(money, command.request().getDate(), client);
-        var commission = client.commitTransaction(transaction, discountEngine);
+        var commission = client.calculateCommission(transaction, discountEngine);
 
         clientRepository.save(client);
-        commissionRepository.save(commission);
 
         return commission;
     }

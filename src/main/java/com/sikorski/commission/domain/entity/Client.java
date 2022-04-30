@@ -1,9 +1,19 @@
 package com.sikorski.commission.domain.entity;
 
 import com.sikorski.commission.domain.discount.DiscountEngine;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Version;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
@@ -40,9 +50,11 @@ public class Client extends BaseEntity {
         return new Client(clientId);
     }
 
-    public Commission commitTransaction(Transaction transaction, DiscountEngine engine) {
-        addTransaction(transaction);
-        return engine.process(this);
+    public Commission calculateCommission(Transaction transaction, DiscountEngine discountEngine) {
+        this.transactions.add(transaction);
+        var commission = discountEngine.process(this);
+        transaction.addCommission(commission);
+        return commission;
     }
 
     public Transaction getCurrentTransaction() {
@@ -58,9 +70,5 @@ public class Client extends BaseEntity {
                 .filter(Transaction::isArchived)
                 .map(Transaction::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
-    }
-
-    private void addTransaction(Transaction transaction) {
-        this.transactions.add(transaction);
     }
 }
