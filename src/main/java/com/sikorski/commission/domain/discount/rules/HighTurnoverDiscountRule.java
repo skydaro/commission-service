@@ -23,15 +23,17 @@ public class HighTurnoverDiscountRule extends Discount {
 
     @Override
     public boolean matches(Client client) {
-        return client.getSumOfTransactions()
+        var transactions = client.getTransactions();
+        return transactions.getSumOfTransactions()
                 .compareTo(settings.limit) >= 0;
     }
 
     @Override
     public Commission calculate(Client client) {
+        var transactions = client.getTransactions();
         return new Commission(settings.amount,
                 this.getName(),
-                client.getCurrentTransaction());
+                transactions.getCurrentTransaction());
     }
 
     @Data

@@ -29,7 +29,8 @@ public class DefaultDiscountRule extends Discount {
 
     @Override
     public Commission calculate(Client client) {
-        var currentTransaction = client.getCurrentTransaction();
+        var transactions = client.getTransactions();
+        var currentTransaction = transactions.getCurrentTransaction();
         var money =   currentTransaction.getMoney().multiply(settings.price);
         return new Commission(money.getAmount().max(settings.minAmount),
                 this.getName(),

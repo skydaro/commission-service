@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 import static java.math.BigDecimal.valueOf;
 
@@ -54,9 +52,8 @@ class DiscountEngineIntegrationTest extends ContainerizedIntegrationTest {
     @Test
     void process_checkIfHighTurnoverDiscountRuleWasUsed() {
         // given
-        Set<Transaction> transactions = new HashSet<>();
-        transactions.add(createSampleTransaction("1500", null, false));
-        var client = createSampleClient(true, transactions);
+        var client = createSampleClient(true);
+        client.getTransactions().addTransaction(createSampleTransaction("1500", null, false));
 
         // when
         var result = client.calculateCommission(createSampleTransaction("7000", client, true), discountEngine);
@@ -73,11 +70,6 @@ class DiscountEngineIntegrationTest extends ContainerizedIntegrationTest {
 
     @NotNull
     private Client createSampleClient(boolean hasDiscount) {
-        return new Client(SAMPLE_CLIENT_ID, hasDiscount, new HashSet<>(), 0L);
-    }
-
-    @NotNull
-    private Client createSampleClient(boolean hasDiscount, Set<Transaction> transactions) {
-        return new Client(SAMPLE_CLIENT_ID, hasDiscount, transactions, 0L);
+        return new Client(SAMPLE_CLIENT_ID, hasDiscount);
     }
 }

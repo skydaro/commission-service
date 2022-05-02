@@ -1,5 +1,6 @@
 package com.sikorski.commission.api.controller;
 
+import com.sikorski.commission.api.controller.dto.CommissionResponse;
 import com.sikorski.commission.api.controller.dto.TransactionRequest;
 import com.sikorski.commission.application.service.CommissionService;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +28,8 @@ public class CommissionController {
 
     @PostMapping()
     @Synchronized()
-    public ResponseEntity<?> getCommission(@Valid @RequestBody TransactionRequest request,
-                                           BindingResult bindingResult) {
+    public ResponseEntity<CommissionResponse> getCommission(@Valid @RequestBody TransactionRequest request,
+                                                            BindingResult bindingResult) {
         log.info("Transaction request received: {}", request);
         return new ResponseEntity<>(service.getCommission(request), HttpStatus.OK);
     }

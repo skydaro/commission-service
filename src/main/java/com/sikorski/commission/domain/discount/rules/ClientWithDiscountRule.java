@@ -28,8 +28,9 @@ public class ClientWithDiscountRule extends Discount {
 
     @Override
     public Commission calculate(Client client) {
+        var transactions = client.getTransactions();
         return new Commission(settings.amount,
-                this.getName(), client.getCurrentTransaction());
+                this.getName(), transactions.getCurrentTransaction());
     }
 
     @Data
