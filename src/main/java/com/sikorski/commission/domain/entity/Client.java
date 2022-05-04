@@ -1,7 +1,6 @@
 package com.sikorski.commission.domain.entity;
 
 import com.sikorski.commission.domain.discount.DiscountEngine;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

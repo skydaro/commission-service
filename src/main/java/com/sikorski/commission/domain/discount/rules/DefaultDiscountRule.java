@@ -1,24 +1,21 @@
 package com.sikorski.commission.domain.discount.rules;
 
-import com.sikorski.commission.domain.discount.Discount;
+import com.sikorski.commission.domain.discount.DiscountRule;
 import com.sikorski.commission.domain.entity.Client;
 import com.sikorski.commission.domain.entity.Commission;
-import lombok.Builder;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 import lombok.extern.jackson.Jacksonized;
-import lombok.extern.slf4j.Slf4j;
 
 import java.math.BigDecimal;
 
 @Jacksonized
 @SuperBuilder
-@Data
 @EqualsAndHashCode(callSuper = true)
 @ToString(callSuper = true)
-public class DefaultDiscountRule extends Discount {
+public class DefaultDiscountRule extends DiscountRule {
 
     private final DefaultDiscountRuleSettings settings;
 
@@ -37,9 +34,8 @@ public class DefaultDiscountRule extends Discount {
                 currentTransaction);
     }
 
-    @Data
     @Jacksonized
-    @Builder
+    @Setter
     public static class DefaultDiscountRuleSettings {
         private BigDecimal minAmount;
         private BigDecimal price;

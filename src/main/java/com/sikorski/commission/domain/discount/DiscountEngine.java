@@ -13,7 +13,7 @@ import java.util.Set;
 @Component
 @RequiredArgsConstructor
 public class DiscountEngine {
-    private final Set<Discount> discountRules;
+    private final Set<DiscountRule> discountRules;
 
     public Commission process(Client client) {
         return discountRules.stream()
