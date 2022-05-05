@@ -1,5 +1,6 @@
 package com.sikorski.commission.api.controller.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Value;
@@ -14,6 +15,7 @@ import java.time.LocalDate;
 @Builder
 public class TransactionRequest {
     @NotNull(message = "Date can not be null")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     LocalDate date;
     @NotNull(message = "Amount can not be null")
     @NotEmpty(message = "Amount can not be empty")
