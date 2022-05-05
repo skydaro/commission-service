@@ -1,17 +1,22 @@
 package com.sikorski.commission.domain.entity;
 
 import com.sikorski.commission.domain.discount.DiscountEngine;
+import com.sikorski.commission.domain.entity.value_object.Commission;
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Getter
 @Table(name = "clients")
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @ToString(callSuper = true)
 public class Client extends BaseEntity {
@@ -33,12 +38,12 @@ public class Client extends BaseEntity {
         this.hasDiscount = hasDiscount;
     }
 
-    public boolean hasDiscount() {
-        return this.hasDiscount;
-    }
-
     public static Client create(Integer clientId) {
         return new Client(clientId);
+    }
+
+    public boolean hasDiscount() {
+        return this.hasDiscount;
     }
 
     public Commission calculateCommission(Transaction transaction, DiscountEngine discountEngine) {

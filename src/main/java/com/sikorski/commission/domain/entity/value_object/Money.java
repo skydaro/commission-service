@@ -1,6 +1,7 @@
-package com.sikorski.commission.domain.entity;
+package com.sikorski.commission.domain.entity.value_object;
 
 import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.Currency;
 
 @Getter
 @Embeddable
+@EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Money {
 
@@ -46,6 +48,10 @@ public class Money {
 
     public boolean isDefaultCurrency(String currency) {
         return this.currency.getCurrencyCode().equals(currency);
+    }
+
+    public Money max(BigDecimal value) {
+        return new Money(this.getAmount().max(value));
     }
 
     @Override

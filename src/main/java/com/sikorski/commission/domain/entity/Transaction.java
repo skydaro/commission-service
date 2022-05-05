@@ -1,18 +1,13 @@
 package com.sikorski.commission.domain.entity;
 
+import com.sikorski.commission.domain.entity.value_object.Commission;
+import com.sikorski.commission.domain.entity.value_object.Money;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
@@ -25,7 +20,6 @@ import java.time.ZonedDateTime;
 @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @ToString(callSuper = true)
 public class Transaction extends BaseEntity {
-
     @Embedded
     private Money money;
     private LocalDate date;
@@ -39,20 +33,8 @@ public class Transaction extends BaseEntity {
     @Transient
     private boolean isCurrent;
 
-    @OneToOne(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            mappedBy = "transaction"
-    )
+    @Embedded
     private Commission commission = new Commission();
-
-    public BigDecimal getAmount() {
-        return money.getAmount();
-    }
-
-    public static Transaction create(Money money, LocalDate date, Client client) {
-        return new Transaction(money, date, client, ZonedDateTime.now(ZoneOffset.UTC), true);
-    }
 
     public Transaction(Money money, LocalDate date, Client client, ZonedDateTime dateCreated, boolean isCurrent) {
         this.money = money;
@@ -60,6 +42,14 @@ public class Transaction extends BaseEntity {
         this.client = client;
         this.dateCreated = dateCreated;
         this.isCurrent = isCurrent;
+    }
+
+    public static Transaction create(Money money, LocalDate date, Client client) {
+        return new Transaction(money, date, client, ZonedDateTime.now(ZoneOffset.UTC), true);
+    }
+
+    public BigDecimal getAmount() {
+        return money.getAmount();
     }
 
     boolean hasEqualMonthAndYear(Transaction transaction) {

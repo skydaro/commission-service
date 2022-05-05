@@ -6,7 +6,7 @@ import com.sikorski.commission.domain.discount.rules.ClientWithDiscountRule;
 import com.sikorski.commission.domain.discount.rules.DefaultDiscountRule;
 import com.sikorski.commission.domain.discount.rules.HighTurnoverDiscountRule;
 import com.sikorski.commission.domain.entity.Client;
-import com.sikorski.commission.domain.entity.Commission;
+import com.sikorski.commission.domain.entity.value_object.Commission;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;

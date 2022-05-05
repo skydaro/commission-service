@@ -1,7 +1,7 @@
 package com.sikorski.commission.domain.discount;
 
 import com.sikorski.commission.domain.entity.Client;
-import com.sikorski.commission.domain.entity.Commission;
+import com.sikorski.commission.domain.entity.value_object.Commission;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

@@ -2,7 +2,8 @@ package com.sikorski.commission.domain.discount.rules;
 
 import com.sikorski.commission.domain.discount.DiscountRule;
 import com.sikorski.commission.domain.entity.Client;
-import com.sikorski.commission.domain.entity.Commission;
+import com.sikorski.commission.domain.entity.value_object.Commission;
+import com.sikorski.commission.domain.entity.value_object.Money;
 import lombok.EqualsAndHashCode;
 import lombok.Setter;
 import lombok.ToString;
@@ -25,9 +26,8 @@ public class ClientWithDiscountRule extends DiscountRule {
 
     @Override
     public Commission calculate(Client client) {
-        var transactions = client.getTransactions();
-        return new Commission(settings.amount,
-                this.getName(), transactions.getCurrentTransaction());
+        return new Commission(new Money(settings.amount),
+                this.getName());
     }
 
     @Jacksonized

@@ -1,7 +1,7 @@
 package com.sikorski.commission.domain.command;
 
 import an.awesome.pipelinr.Command;
-import com.sikorski.commission.domain.entity.Commission;
+import com.sikorski.commission.domain.entity.value_object.Commission;
 
 import java.time.LocalDate;
 

@@ -2,7 +2,7 @@ package com.sikorski.commission.domain.discount.rules;
 
 import com.sikorski.commission.domain.discount.DiscountRule;
 import com.sikorski.commission.domain.entity.Client;
-import com.sikorski.commission.domain.entity.Commission;
+import com.sikorski.commission.domain.entity.value_object.Commission;
 import lombok.EqualsAndHashCode;
 import lombok.Setter;
 import lombok.ToString;
@@ -29,9 +29,8 @@ public class DefaultDiscountRule extends DiscountRule {
         var transactions = client.getTransactions();
         var currentTransaction = transactions.getCurrentTransaction();
         var money =   currentTransaction.getMoney().multiply(settings.price);
-        return new Commission(money.getAmount().max(settings.minAmount),
-                this.getName(),
-                currentTransaction);
+        return new Commission(money.max(settings.minAmount),
+                this.getName());
     }
 
     @Jacksonized

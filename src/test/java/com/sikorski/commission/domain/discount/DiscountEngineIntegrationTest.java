@@ -2,7 +2,7 @@ package com.sikorski.commission.domain.discount;
 
 import com.sikorski.commission.ContainerizedIntegrationTest;
 import com.sikorski.commission.domain.entity.Client;
-import com.sikorski.commission.domain.entity.Money;
+import com.sikorski.commission.domain.entity.value_object.Money;
 import com.sikorski.commission.domain.entity.Transaction;
 import org.assertj.core.api.Assertions;
 import org.jetbrains.annotations.NotNull;
