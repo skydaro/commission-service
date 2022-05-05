@@ -1,4 +1,4 @@
-package com.sikorski.commission.domain.dao;
+package com.sikorski.commission.domain.repository;
 
 import com.sikorski.commission.domain.entity.Client;
 import org.springframework.data.jpa.repository.JpaRepository;

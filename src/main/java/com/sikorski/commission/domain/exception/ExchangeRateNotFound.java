@@ -1,4 +1,4 @@
-package com.sikorski.commission.domain.fx;
+package com.sikorski.commission.domain.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

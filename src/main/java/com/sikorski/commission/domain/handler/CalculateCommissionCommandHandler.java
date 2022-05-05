@@ -2,13 +2,13 @@ package com.sikorski.commission.domain.handler;
 
 import an.awesome.pipelinr.Command;
 import com.sikorski.commission.domain.command.CalculateCommissionCommand;
-import com.sikorski.commission.domain.dao.ClientRepository;
+import com.sikorski.commission.domain.repository.ClientRepository;
 import com.sikorski.commission.domain.discount.DiscountEngine;
 import com.sikorski.commission.domain.entity.Client;
 import com.sikorski.commission.domain.entity.Commission;
 import com.sikorski.commission.domain.entity.Money;
 import com.sikorski.commission.domain.entity.Transaction;
-import com.sikorski.commission.domain.fx.ExchangeRateRepository;
+import com.sikorski.commission.domain.repository.ExchangeRateRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

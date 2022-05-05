@@ -1,4 +1,4 @@
-package com.sikorski.commission.domain.fx;
+package com.sikorski.commission.domain.repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

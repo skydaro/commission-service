@@ -1,6 +1,5 @@
 package com.sikorski.commission.configuration.handler;
 
-import com.sikorski.commission.domain.fx.ExchangeRateNotFound;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

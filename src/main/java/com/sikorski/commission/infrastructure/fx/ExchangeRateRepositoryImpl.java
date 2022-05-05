@@ -1,7 +1,7 @@
 package com.sikorski.commission.infrastructure.fx;
 
-import com.sikorski.commission.domain.fx.ExchangeRateNotFound;
-import com.sikorski.commission.domain.fx.ExchangeRateRepository;
+import com.sikorski.commission.domain.exception.ExchangeRateNotFound;
+import com.sikorski.commission.domain.repository.ExchangeRateRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

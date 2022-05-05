@@ -2,6 +2,8 @@ package com.sikorski.commission.domain.fx;
 
 import com.sikorski.commission.ContainerizedIntegrationTest;
 import com.sikorski.commission.MockWebServer;
+import com.sikorski.commission.domain.exception.ExchangeRateNotFound;
+import com.sikorski.commission.domain.repository.ExchangeRateRepository;
 import lombok.SneakyThrows;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.ThrowableAssert;
