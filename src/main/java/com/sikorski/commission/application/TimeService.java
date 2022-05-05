@@ -1,4 +1,4 @@
-package com.sikorski.commission.application.service;
+package com.sikorski.commission.application;
 
 import org.springframework.stereotype.Service;
 

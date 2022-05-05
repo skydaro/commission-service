@@ -1,7 +1,8 @@
 package com.sikorski.commission.api.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.Builder;
+import lombok.Value;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;

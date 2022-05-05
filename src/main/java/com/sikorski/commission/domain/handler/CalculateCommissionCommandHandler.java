@@ -1,8 +1,7 @@
-package com.sikorski.commission.application.handler;
+package com.sikorski.commission.domain.handler;
 
 import an.awesome.pipelinr.Command;
-import com.sikorski.commission.api.controller.dto.TransactionRequest;
-import com.sikorski.commission.application.command.CalculateCommissionCommand;
+import com.sikorski.commission.domain.command.CalculateCommissionCommand;
 import com.sikorski.commission.domain.dao.ClientRepository;
 import com.sikorski.commission.domain.discount.DiscountEngine;
 import com.sikorski.commission.domain.entity.Client;
@@ -22,9 +21,9 @@ public class CalculateCommissionCommandHandler implements Command.Handler<Calcul
 
     @Override
     public Commission handle(CalculateCommissionCommand command) {
-        var money = getMoney(command.request());
-        var client = getClient(command.request().getClientId());
-        var transaction = Transaction.create(money, command.request().getDate(), client);
+        var money = getMoney(command);
+        var client = getClient(command.clientId());
+        var transaction = Transaction.create(money, command.date(), client);
         var commission = client.calculateCommission(transaction, discountEngine);
 
         clientRepository.save(client);
@@ -32,12 +31,12 @@ public class CalculateCommissionCommandHandler implements Command.Handler<Calcul
         return commission;
     }
 
-    private Money getMoney(TransactionRequest request) {
-        var money = new Money(request.getAmount());
-        if (money.isDefaultCurrency(request.getCurrency())) {
+    private Money getMoney(CalculateCommissionCommand command) {
+        var money = new Money(command.amount());
+        if (money.isDefaultCurrency(command.currency())) {
             return money;
         }
-        var rate = exchangeRateRepository.getRate(request.getCurrency(), request.getDate());
+        var rate = exchangeRateRepository.getRate(command.currency(), command.date());
         return money.divide(rate);
     }
 

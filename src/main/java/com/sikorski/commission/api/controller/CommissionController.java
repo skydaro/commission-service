@@ -2,7 +2,7 @@ package com.sikorski.commission.api.controller;
 
 import com.sikorski.commission.api.controller.dto.CommissionResponse;
 import com.sikorski.commission.api.controller.dto.TransactionRequest;
-import com.sikorski.commission.application.service.CommissionService;
+import com.sikorski.commission.application.CommissionService;
 import lombok.RequiredArgsConstructor;
 import lombok.Synchronized;
 import lombok.extern.slf4j.Slf4j;
