@@ -18,9 +18,10 @@
         <spring-boot-starter.version>2.6.7</spring-boot-starter.version>
         <mockserver.version>1.16.2</mockserver.version>
         <mockserver-client.version>5.11.1</mockserver-client.version>
-        <springdoc-openapi-ui.version>1.6.7</springdoc-openapi-ui.version>
+        <springdoc-openapi-ui.version>1.6.8</springdoc-openapi-ui.version>
         <feign.version>11.8</feign.version>
         <pipelinr.version>0.7</pipelinr.version>
+        <swagger.annotations.version>1.6.6</swagger.annotations.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -91,6 +92,12 @@
             <groupId>net.sizovs</groupId>
             <artifactId>pipelinr</artifactId>
             <version>${pipelinr.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger.annotations.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
