@@ -23,3 +23,6 @@ feign:
       url: "https://api.exchangerate.host"
       connectTimeout: 5000
       readTimeout: 5000
+
+redis:
+  address: "${REDIS_ADDRESS:redis://localhost:6379}"
